@@ -4,7 +4,7 @@ go 1.21.0
 
 require (
 	github.com/stretchr/testify v1.9.0
-	github.com/vitaliy-ukiru/telebot-filter v0.0.0-20240321074306-d0738fdba4e0
+	github.com/vitaliy-ukiru/telebot-filter v0.0.0-20240428190038-e168c97a355b
 	gopkg.in/telebot.v3 v3.2.1
 )
 
