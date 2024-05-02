@@ -22,7 +22,7 @@ func (m *Manager) WrapContext(next tele.HandlerFunc) tele.HandlerFunc {
 
 type handlerEntity struct {
 	onState StateMatcher
-	filters []tf.Filter
+	filter  tf.Filter
 	handler Handler
 }
 
@@ -37,12 +37,7 @@ func (fh fsmHandler) Check(c tele.Context) bool {
 		return false
 	}
 
-	for _, f := range fh.filters {
-		if !f(c) {
-			return false
-		}
-	}
-	return true
+	return fh.filter == nil || fh.filter(c)
 }
 
 func (fh fsmHandler) Execute(c tele.Context) error {

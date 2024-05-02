@@ -1,6 +1,7 @@
 package fsm
 
 import (
+	filterspkg "github.com/vitaliy-ukiru/telebot-filter/pkg/filters"
 	tf "github.com/vitaliy-ukiru/telebot-filter/telefilter"
 	tele "gopkg.in/telebot.v3"
 )
@@ -104,7 +105,7 @@ func (m *Manager) New(opts ...HandlerOptionFunc) tf.Route {
 
 	entity := handlerEntity{
 		onState: hc.OnState,
-		filters: hc.Filters,
+		filter:  combineFilters(hc.Filters),
 		handler: hc.Handler,
 	}
 	return m.newRoute(hc.Endpoint, entity, hc.Middlewares)
@@ -119,4 +120,15 @@ func (m *Manager) newRoute(e any, entity handlerEntity, mw []tele.MiddlewareFunc
 		},
 		Middlewares: mw,
 	}
+}
+
+func combineFilters(filters []tf.Filter) tf.Filter {
+	n := len(filters)
+	switch n {
+	case 0:
+		return nil
+	case 1:
+		return filters[0]
+	}
+	return filterspkg.All(filters...)
 }
