@@ -6,31 +6,31 @@ import (
 	tele "gopkg.in/telebot.v3"
 )
 
-func Use(mw ...tele.MiddlewareFunc) fsm.HandlerOptionFunc {
+func Use(mw ...tele.MiddlewareFunc) fsm.HandlerOption {
 	return func(hc *fsm.HandlerConfig) {
 		hc.Middlewares = mw
 	}
 }
 
-func On(e any) fsm.HandlerOptionFunc {
+func On(e any) fsm.HandlerOption {
 	return func(hc *fsm.HandlerConfig) {
 		hc.Endpoint = e
 	}
 }
 
-func Filter(filters ...tf.Filter) fsm.HandlerOptionFunc {
+func Filter(filters ...tf.Filter) fsm.HandlerOption {
 	return func(hc *fsm.HandlerConfig) {
 		hc.Filters = filters
 	}
 }
 
-func Do(h fsm.Handler) fsm.HandlerOptionFunc {
+func Do(h fsm.Handler) fsm.HandlerOption {
 	return func(hc *fsm.HandlerConfig) {
 		hc.Handler = h
 	}
 }
 
-func OnStates(states ...fsm.State) fsm.HandlerOptionFunc {
+func OnStates(states ...fsm.State) fsm.HandlerOption {
 	var filter fsm.StateMatcher
 	switch len(states) {
 	case 0:
@@ -45,19 +45,19 @@ func OnStates(states ...fsm.State) fsm.HandlerOptionFunc {
 	}
 }
 
-func FilterState(filter fsm.StateFilter) fsm.HandlerOptionFunc {
+func FilterState(filter fsm.StateFilter) fsm.HandlerOption {
 	return func(hc *fsm.HandlerConfig) {
 		hc.OnState = filter
 	}
 }
 
-func MatchState(matcher fsm.StateMatcher) fsm.HandlerOptionFunc {
+func MatchState(matcher fsm.StateMatcher) fsm.HandlerOption {
 	return func(hc *fsm.HandlerConfig) {
 		hc.OnState = matcher
 	}
 }
 
-func Config(config fsm.HandlerConfig) fsm.HandlerOptionFunc {
+func Config(config fsm.HandlerConfig) fsm.HandlerOption {
 	return func(hc *fsm.HandlerConfig) {
 		*hc = config
 	}

@@ -34,11 +34,15 @@ func (m *Manager) Filter(filter StateMatcher) tf.Filter {
 func (m *Manager) runFilter(c tele.Context, filter StateMatcher) bool {
 	fsmCtx := m.mustGetContext(c)
 
+	return m.filterProcessor(c, fsmCtx, filter)
+}
+
+func DefaultFilterProcessor(c tele.Context, fsmCtx Context, matcher StateMatcher) bool {
 	state, err := fsmCtx.State(context.Background())
 	if err != nil {
 		c.Bot().OnError(err, c)
 		return false
 	}
 
-	return filter.MatchState(state)
+	return matcher.MatchState(state)
 }

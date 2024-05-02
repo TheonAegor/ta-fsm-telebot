@@ -6,34 +6,62 @@ import (
 	tele "gopkg.in/telebot.v3"
 )
 
-// Handler is object for handling  updates with FSM context.
+// Handler is function for handling updates
+// with access to user state via fsm context.
 type Handler func(c tele.Context, state Context) error
 
-// ContextFactoryFunc alias for function for create new context.
-// You can use custom Context implementation.
-type ContextFactoryFunc func(storage Storage, key StorageKey) Context
+// ContextFactory creates new FSM context.
+type ContextFactory func(storage Storage, key StorageKey) Context
+
+// StateFilterProcessor must return filter result.
+// Processor should handle problems by self or
+// gives this task to external systems.
+type StateFilterProcessor func(c tele.Context, fsmCtx Context, matcher StateMatcher) bool
 
 // Manager is object for managing FSM, binding handlers.
 type Manager struct {
-	store          Storage
-	strategy       Strategy
-	contextFactory ContextFactoryFunc
+	store           Storage
+	strategy        Strategy
+	contextFactory  ContextFactory
+	filterProcessor StateFilterProcessor
 }
 
-func New(store Storage, strategy Strategy, contextMaker ContextFactoryFunc) *Manager {
-	if contextMaker == nil {
-		contextMaker = NewFSMContext
+// Settings provides configuration for [Manager].
+// Works via [ManagerOption]
+type Settings struct {
+	Strategy
+	ContextFactory
+	StateFilterProcessor
+}
+
+type ManagerOption func(*Settings)
+
+func New(storage Storage, opts ...ManagerOption) *Manager {
+	cfg := new(Settings)
+
+	for _, opt := range opts {
+		opt(cfg)
 	}
+
+	if cfg.ContextFactory == nil {
+		cfg.ContextFactory = NewFSMContext
+	}
+
+	if cfg.StateFilterProcessor == nil {
+		cfg.StateFilterProcessor = DefaultFilterProcessor
+	}
+
 	return &Manager{
-		store:          store,
-		strategy:       strategy,
-		contextFactory: contextMaker,
+		store:           storage,
+		strategy:        cfg.Strategy,
+		contextFactory:  cfg.ContextFactory,
+		filterProcessor: cfg.StateFilterProcessor,
 	}
 }
 
 // NewContext creates new FSM Context.
 //
-// It calls provided ContextFactoryFunc.
+// It calls provided ContextFactory.
 func (m *Manager) NewContext(ctx tele.Context) Context {
 	key := ExtractKeyWithStrategy(ctx, m.strategy)
 	return m.contextFactory(m.store, key)
@@ -68,14 +96,14 @@ type HandlerConfig struct {
 
 // ---- handler section ----
 
-type HandlerOptionFunc func(hc *HandlerConfig)
+type HandlerOption func(hc *HandlerConfig)
 
 type Dispatcher interface {
 	Dispatch(tf.Route)
 }
 
 // Bind builds handler and to dispatcher. For builtin option see fsmopt pkg.
-func (m *Manager) Bind(dp Dispatcher, opts ...HandlerOptionFunc) {
+func (m *Manager) Bind(dp Dispatcher, opts ...HandlerOption) {
 	dp.Dispatch(m.New(opts...))
 }
 
@@ -97,7 +125,7 @@ func (m *Manager) Handle(
 	dp.Dispatch(route)
 }
 
-func (m *Manager) New(opts ...HandlerOptionFunc) tf.Route {
+func (m *Manager) New(opts ...HandlerOption) tf.Route {
 	hc := new(HandlerConfig)
 	for _, opt := range opts {
 		opt(hc)
