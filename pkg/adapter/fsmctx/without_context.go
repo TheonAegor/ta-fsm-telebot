@@ -7,7 +7,7 @@ import (
 	tele "gopkg.in/telebot.v3"
 )
 
-// WithoutContext provide old [fsm.Context] API without context.Context argument.
+// WithoutContext provide old [fsm.Context] API without context argument.
 type WithoutContext struct {
 	fsm.Context
 }
