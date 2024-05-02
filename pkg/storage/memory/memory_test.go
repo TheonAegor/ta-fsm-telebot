@@ -90,13 +90,13 @@ func TestStorage_GetData(t *testing.T) {
 			}
 			tt.wantErr(
 				t,
-				m.GetData(
+				m.Data(
 					ctx,
 					fsm.StorageKey{ChatID: c, UserID: u},
 					tt.args.key,
 					tt.args.to,
 				),
-				fmt.Sprintf("GetData(%v, %v, %v, %v, %v)", ctx, c, u, tt.args.key, tt.args.to),
+				fmt.Sprintf("Data(%v, %v, %v, %v, %v)", ctx, c, u, tt.args.key, tt.args.to),
 			)
 		})
 	}

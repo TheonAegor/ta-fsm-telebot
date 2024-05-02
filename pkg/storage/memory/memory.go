@@ -42,7 +42,7 @@ func (m *Storage) do(key fsm.StorageKey, call func(*record)) {
 	m.storage[key] = r
 }
 
-func (m *Storage) GetState(_ context.Context, key fsm.StorageKey) (fsm.State, error) {
+func (m *Storage) State(_ context.Context, key fsm.StorageKey) (fsm.State, error) {
 	m.l.RLock()
 	defer m.l.RUnlock()
 	return m.storage[key].state, nil
@@ -81,7 +81,7 @@ func (m *Storage) UpdateData(_ context.Context, target fsm.StorageKey, key strin
 	return nil
 }
 
-func (m *Storage) GetData(_ context.Context, target fsm.StorageKey, key string, to any) error {
+func (m *Storage) Data(_ context.Context, target fsm.StorageKey, key string, to any) error {
 	m.l.RLock()
 	defer m.l.RUnlock()
 
