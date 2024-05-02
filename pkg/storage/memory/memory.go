@@ -7,7 +7,6 @@ import (
 	"sync"
 
 	"github.com/vitaliy-ukiru/fsm-telebot/v2"
-	"github.com/vitaliy-ukiru/fsm-telebot/v2/pkg/storage"
 )
 
 var _ fsm.Storage = (*Storage)(nil)
@@ -93,31 +92,27 @@ func (m *Storage) Data(_ context.Context, target fsm.StorageKey, key string, to 
 
 	destValue := reflect.ValueOf(to)
 	if destValue.Kind() != reflect.Ptr {
-		return storage.ErrNotPointer
+		return ErrNotPointer
 	}
 	if destValue.IsNil() || !destValue.IsValid() {
-		return storage.ErrInvalidValue
+		return ErrInvalidValue
 	}
 
 	destElem := destValue.Elem()
 	if !destElem.IsValid() {
-		return storage.ErrNotPointer
+		return ErrNotPointer
 	}
 
 	destType := destElem.Type()
 
 	vType := reflect.TypeOf(v)
 	if !vType.AssignableTo(destType) {
-		return &storage.ErrWrongTypeAssign{
+		return &ErrWrongTypeAssign{
 			Expect: vType,
 			Got:    destType,
 		}
 	}
 	destElem.Set(reflect.ValueOf(v))
 
-	return nil
-}
-
-func (m *Storage) Close() error {
 	return nil
 }
