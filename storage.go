@@ -18,9 +18,9 @@ var ErrNotFound = errors.New("fsm/storage: not found")
 //
 // Not recommended works with storage from handlers.
 type Storage interface {
-	// GetState returns State for target. Default state
+	// State returns State for target. Default state
 	// is empty string (DefaultState).
-	GetState(ctx context.Context, targetKey StorageKey) (State, error)
+	State(ctx context.Context, targetKey StorageKey) (State, error)
 
 	// SetState sets state for target.
 	SetState(ctx context.Context, targetKey StorageKey, state State) error
@@ -33,13 +33,9 @@ type Storage interface {
 	//data argument is nil it must deletes this item.
 	UpdateData(ctx context.Context, targetKey StorageKey, key string, data any) error
 
-	// GetData gets data for target and saves it into `to` argument.
+	// Data gets data for target and saves it into `to` argument.
 	// Destination argument must be a valid pointer.
-	GetData(ctx context.Context, targetKey StorageKey, key string, to any) error
-
-	// Close closes storage. Needs for correct work
-	// with storage connection.
-	Close() error
+	Data(ctx context.Context, targetKey StorageKey, key string, to any) error
 }
 
 type StorageKey struct {
