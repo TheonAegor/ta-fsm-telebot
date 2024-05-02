@@ -39,7 +39,7 @@ func NewFSMContext(storage Storage, key StorageKey) Context {
 }
 
 func (f *fsmContext) State(ctx context.Context) (State, error) {
-	return f.storage.GetState(ctx, f.key)
+	return f.storage.State(ctx, f.key)
 }
 
 func (f *fsmContext) SetState(ctx context.Context, state State) error {
@@ -55,5 +55,5 @@ func (f *fsmContext) Update(ctx context.Context, key string, data any) error {
 }
 
 func (f *fsmContext) Data(ctx context.Context, key string, to any) error {
-	return f.storage.GetData(ctx, f.key, key, to)
+	return f.storage.Data(ctx, f.key, key, to)
 }
