@@ -31,6 +31,22 @@ func (h LinkedHashSet[K]) Has(item K) bool {
 	return ok
 }
 
+func (h LinkedHashSet[K]) Item(item K) *HashSetItem[K] {
+	node := h.set[item]
+	if node == nil {
+		return nil
+	}
+	return &HashSetItem[K]{el: node}
+}
+
+func (h LinkedHashSet[K]) Iterate(yield func(K) (next bool)) {
+	for e := h.list.Front(); e != nil; e = e.Next() {
+		if !yield(e.Value) {
+			return
+		}
+	}
+}
+
 type HashSetItem[T comparable] struct {
 	el *Element[T]
 }
@@ -55,20 +71,4 @@ func (item *HashSetItem[T]) Prev() *HashSetItem[T] {
 	}
 
 	return &HashSetItem[T]{el: prev}
-}
-
-func (h LinkedHashSet[K]) Item(item K) *HashSetItem[K] {
-	node := h.set[item]
-	if node == nil {
-		return nil
-	}
-	return &HashSetItem[K]{el: node}
-}
-
-func (h LinkedHashSet[K]) Iterate(yield func(K) (next bool)) {
-	for e := h.list.Front(); e != nil; e = e.Next() {
-		if !yield(e.Value) {
-			return
-		}
-	}
 }
