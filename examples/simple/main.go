@@ -34,12 +34,16 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	dp := dispatcher.NewDispatcher(bot.Group())
-	m := fsm.New(
-		memory.NewStorage(),
-		fsm.StrategyDefault,
-		nil,
-	)
+
+	g := bot.Group()
+	dp := dispatcher.NewDispatcher(g)
+	m := fsm.New(memory.NewStorage())
+
+	// Bind to bot group for call before filters.
+	// WrapContext adds fsm context into telebot context
+	// It helps make less allocations
+	g.Use(m.WrapContext)
+
 	dp.Dispatch(
 		m.New(
 			fsmopt.On("/stop"),            // set endpoint
