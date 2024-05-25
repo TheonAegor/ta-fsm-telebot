@@ -85,6 +85,8 @@ func (m *Manager) Adapt(handler Handler) tele.HandlerFunc {
 	}
 }
 
+// ---- handler section ----
+
 // HandlerConfig is description of FSM handler.
 type HandlerConfig struct {
 	Endpoint    any
@@ -93,8 +95,6 @@ type HandlerConfig struct {
 	Handler     Handler
 	Middlewares []tele.MiddlewareFunc
 }
-
-// ---- handler section ----
 
 type HandlerOption func(hc *HandlerConfig)
 
