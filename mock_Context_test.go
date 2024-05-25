@@ -108,41 +108,6 @@ func (_c *MockContext_Finish_Call) RunAndReturn(run func(context.Context, bool) 
 	return _c
 }
 
-// MustGet provides a mock function with given fields: ctx, key, to
-func (_m *MockContext) MustGet(ctx context.Context, key string, to interface{}) {
-	_m.Called(ctx, key, to)
-}
-
-// MockContext_MustGet_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'MustGet'
-type MockContext_MustGet_Call struct {
-	*mock.Call
-}
-
-// MustGet is a helper method to define mock.On call
-//   - ctx context.Context
-//   - key string
-//   - to interface{}
-func (_e *MockContext_Expecter) MustGet(ctx interface{}, key interface{}, to interface{}) *MockContext_MustGet_Call {
-	return &MockContext_MustGet_Call{Call: _e.mock.On("MustGet", ctx, key, to)}
-}
-
-func (_c *MockContext_MustGet_Call) Run(run func(ctx context.Context, key string, to interface{})) *MockContext_MustGet_Call {
-	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(context.Context), args[1].(string), args[2].(interface{}))
-	})
-	return _c
-}
-
-func (_c *MockContext_MustGet_Call) Return() *MockContext_MustGet_Call {
-	_c.Call.Return()
-	return _c
-}
-
-func (_c *MockContext_MustGet_Call) RunAndReturn(run func(context.Context, string, interface{})) *MockContext_MustGet_Call {
-	_c.Call.Return(run)
-	return _c
-}
-
 // SetState provides a mock function with given fields: ctx, state
 func (_m *MockContext) SetState(ctx context.Context, state State) error {
 	ret := _m.Called(ctx, state)
