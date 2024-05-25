@@ -380,6 +380,8 @@ github.com/vitaliy-ukiru/telebot-filter v0.0.0-20240424213258-8b58bd58596f h1:Kd
 github.com/vitaliy-ukiru/telebot-filter v0.0.0-20240424213258-8b58bd58596f/go.mod h1:T3NgGGTdcnHyNl/rq8bLMsuGAYwRG6n/Jq/eEfEUiYM=
 github.com/vitaliy-ukiru/telebot-filter v0.0.0-20240428190038-e168c97a355b h1:PSJJIh2DetmOMBAtQUAuwRA3EsV3Cis5lT6zf+nYsAM=
 github.com/vitaliy-ukiru/telebot-filter v0.0.0-20240428190038-e168c97a355b/go.mod h1:T3NgGGTdcnHyNl/rq8bLMsuGAYwRG6n/Jq/eEfEUiYM=
+github.com/vitaliy-ukiru/telebot-filter v0.0.0-20240504093450-3ccaf00d3c11 h1:rRLe8nrcfFIgDs0fW8t5qu5K4eTblmVd8RyqDym9VLw=
+github.com/vitaliy-ukiru/telebot-filter v0.0.0-20240504093450-3ccaf00d3c11/go.mod h1:T3NgGGTdcnHyNl/rq8bLMsuGAYwRG6n/Jq/eEfEUiYM=
 github.com/yuin/goldmark v1.1.25/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.1.27/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.1.32/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
