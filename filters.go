@@ -3,7 +3,7 @@ package fsm
 import (
 	"context"
 
-	"github.com/vitaliy-ukiru/fsm-telebot/v2/internal/container"
+	"github.com/TheonAegor/ta-fsm-telebot/internal/container"
 	tf "github.com/vitaliy-ukiru/telebot-filter/telefilter"
 	tele "gopkg.in/telebot.v3"
 )

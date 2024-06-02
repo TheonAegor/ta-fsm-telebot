@@ -1,6 +1,6 @@
 package fsmopt
 
-import "github.com/vitaliy-ukiru/fsm-telebot/v2"
+import "github.com/TheonAegor/ta-fsm-telebot"
 
 func Strategy(strategy fsm.Strategy) fsm.ManagerOption {
 	return func(config *fsm.Settings) {

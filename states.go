@@ -3,7 +3,7 @@ package fsm
 import (
 	"strings"
 
-	"github.com/vitaliy-ukiru/fsm-telebot/v2/internal/container"
+	"github.com/TheonAegor/ta-fsm-telebot/internal/container"
 )
 
 // State objects just string for identification.

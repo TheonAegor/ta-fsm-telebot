@@ -1,7 +1,7 @@
 package fsmopt
 
 import (
-	"github.com/vitaliy-ukiru/fsm-telebot/v2"
+	"github.com/TheonAegor/ta-fsm-telebot"
 	tf "github.com/vitaliy-ukiru/telebot-filter/telefilter"
 	tele "gopkg.in/telebot.v3"
 )

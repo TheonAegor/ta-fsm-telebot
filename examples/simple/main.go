@@ -8,9 +8,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/vitaliy-ukiru/fsm-telebot/v2"
-	"github.com/vitaliy-ukiru/fsm-telebot/v2/fsmopt"
-	"github.com/vitaliy-ukiru/fsm-telebot/v2/pkg/storage/memory"
+	"github.com/TheonAegor/ta-fsm-telebot"
+	"github.com/TheonAegor/ta-fsm-telebot/fsmopt"
+	"github.com/TheonAegor/ta-fsm-telebot/pkg/storage/memory"
 	"github.com/vitaliy-ukiru/telebot-filter/dispatcher"
 	"github.com/vitaliy-ukiru/telebot-filter/routing"
 	tf "github.com/vitaliy-ukiru/telebot-filter/telefilter"

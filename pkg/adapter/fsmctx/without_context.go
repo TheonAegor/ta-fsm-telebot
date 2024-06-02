@@ -3,7 +3,7 @@ package fsmctx
 import (
 	"context"
 
-	"github.com/vitaliy-ukiru/fsm-telebot/v2"
+	"github.com/TheonAegor/ta-fsm-telebot"
 	tele "gopkg.in/telebot.v3"
 )
 

@@ -2,10 +2,10 @@ package fsmctx_test
 
 import (
 	"context"
+	fsm "github.com/TheonAegor/ta-fsm-telebot"
 	"time"
 
-	"github.com/vitaliy-ukiru/fsm-telebot/v2"
-	"github.com/vitaliy-ukiru/fsm-telebot/v2/pkg/adapter/fsmctx"
+	"github.com/TheonAegor/ta-fsm-telebot/pkg/adapter/fsmctx"
 	tele "gopkg.in/telebot.v3"
 )
 

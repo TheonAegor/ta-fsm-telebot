@@ -6,8 +6,8 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/TheonAegor/ta-fsm-telebot"
 	"github.com/stretchr/testify/assert"
-	"github.com/vitaliy-ukiru/fsm-telebot/v2"
 )
 
 func TestStorage_GetData(t *testing.T) {

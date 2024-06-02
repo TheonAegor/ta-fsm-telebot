@@ -12,7 +12,7 @@ It not a full implementation FSM. It just states manager for telegram bots.
 
 ## Install:
 ```
-go get github.com/vitaliy-ukiru/fsm-telebot/v2
+go get github.com/TheonAegor/ta-fsm-telebot
 ```
 
 
