@@ -78,13 +78,17 @@ func (s Strategy) Apply(botId int64, chatId int64, userId int64, threadId int64)
 }
 
 func ExtractKeyWithStrategy(c tele.Context, strategy Strategy) StorageKey {
-	var chatId int64
+	var (
+		chatId, threadId int64
+	)
 	// when we get pre_checkout_query, c.Chat() is nil
 	if c.Chat() != nil {
 		chatId = c.Chat().ID
 	}
 	userId := c.Sender().ID
-	threadId := int64(c.Message().ThreadID)
+	if c.Message() != nil {
+		threadId = int64(c.Message().ThreadID)
+	}
 
 	bot := c.Bot().Me
 	return strategy.Apply(bot.ID, chatId, userId, threadId)
